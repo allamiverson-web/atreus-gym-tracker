@@ -1,0 +1,644 @@
+:root {
+  color-scheme: dark;
+  --bg: #090914;
+  --panel: rgba(18, 19, 36, 0.88);
+  --panel-strong: rgba(31, 29, 57, 0.96);
+  --line: rgba(117, 255, 230, 0.22);
+  --text: #f7fbff;
+  --muted: #9fa8c4;
+  --pink: #ff3ea5;
+  --cyan: #41f4e9;
+  --gold: #ffd166;
+  --green: #63ff8f;
+  --red: #ff5a6e;
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow-x: hidden;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(65, 244, 233, 0.8);
+  background: rgba(65, 244, 233, 0.12);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  transform: none;
+}
+
+input {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 8px;
+  background: rgba(5, 7, 19, 0.72);
+  color: var(--text);
+  padding: 0 12px;
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(65, 244, 233, 0.13);
+}
+
+.city-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  --scroll: 0px;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255, 62, 165, 0.2), transparent 22%),
+    radial-gradient(circle at 78% 14%, rgba(65, 244, 233, 0.18), transparent 22%),
+    linear-gradient(180deg, #06071c 0%, #120820 46%, #05050c 100%);
+  overflow: hidden;
+}
+
+.city-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, transparent 0 46%, rgba(65, 244, 233, 0.08) 47%, transparent 49%),
+    linear-gradient(70deg, transparent 0 55%, rgba(255, 62, 165, 0.07) 56%, transparent 58%),
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 5px);
+  opacity: 0.45;
+  mix-blend-mode: screen;
+}
+
+.city-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  background:
+    linear-gradient(90deg, rgba(255, 62, 165, 0.1), transparent 18%, transparent 82%, rgba(65, 244, 233, 0.09)),
+    linear-gradient(180deg, transparent 0 62%, rgba(0, 0, 0, 0.58));
+  pointer-events: none;
+}
+
+.sky-haze {
+  position: absolute;
+  inset: -8% -5% 0;
+  transform: translateY(calc(var(--scroll) * 0.05));
+  background:
+    radial-gradient(circle at 55% 18%, rgba(255, 62, 165, 0.28), transparent 16%),
+    radial-gradient(circle at 35% 34%, rgba(65, 244, 233, 0.16), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 48%);
+  filter: blur(2px);
+  opacity: 0.88;
+}
+
+.skyline {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 100vh;
+}
+
+.skyline span {
+  position: absolute;
+  left: var(--x);
+  bottom: 0;
+  width: max(var(--w), 104px);
+  height: var(--h);
+  border: 1px solid rgba(65, 244, 233, 0.24);
+  background:
+    linear-gradient(90deg, rgba(65, 244, 233, 0.36) 0 2px, transparent 2px calc(100% - 2px), rgba(255, 62, 165, 0.24) calc(100% - 2px)),
+    repeating-linear-gradient(90deg, transparent 0 16px, rgba(65, 244, 233, 0.78) 16px 20px, transparent 20px 33px),
+    repeating-linear-gradient(180deg, transparent 0 21px, rgba(255, 62, 165, 0.64) 21px 25px, transparent 25px 43px),
+    linear-gradient(180deg, rgba(17, 19, 49, 0.96), rgba(4, 5, 15, 0.98));
+  background-position: 0 calc(var(--scroll) * -0.12), 0 0, 0 calc(var(--scroll) * -0.18), 0 0;
+  box-shadow: inset 0 0 28px rgba(65, 244, 233, 0.1), 0 0 42px rgba(0, 0, 0, 0.68);
+  clip-path: polygon(0 12%, 14% 12%, 14% 3%, 34% 3%, 34% 9%, 74% 9%, 74% 0, 100% 0, 100% 100%, 0 100%);
+  animation: windowPulse 3.8s ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+.skyline-back {
+  filter: blur(1.6px);
+  opacity: 0.62;
+  transform: translate3d(calc(var(--scroll) * -0.018), calc(var(--scroll) * 0.1), 0) scale(1.05);
+}
+
+.skyline-back span {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 21px, rgba(65, 244, 233, 0.36) 21px 25px, transparent 25px 44px),
+    repeating-linear-gradient(180deg, transparent 0 28px, rgba(255, 62, 165, 0.28) 28px 32px, transparent 32px 58px),
+    linear-gradient(180deg, rgba(18, 17, 51, 0.88), rgba(4, 5, 15, 0.95));
+}
+
+.skyline-front {
+  opacity: 0.92;
+  transform: translate3d(calc(var(--scroll) * 0.028), calc(var(--scroll) * 0.18), 0);
+}
+
+.rain-layer {
+  position: absolute;
+  inset: -20% 0;
+  z-index: 5;
+  transform: translateY(calc(var(--scroll) * -0.22));
+  background:
+    repeating-linear-gradient(100deg, transparent 0 22px, rgba(65, 244, 233, 0.2) 22px 23px, transparent 23px 58px),
+    repeating-linear-gradient(100deg, transparent 0 38px, rgba(255, 62, 165, 0.16) 38px 39px, transparent 39px 92px);
+  opacity: 0.48;
+  animation: rainDrift 1.8s linear infinite;
+  pointer-events: none;
+}
+
+.street-glow {
+  position: absolute;
+  inset: auto -10% -18% -10%;
+  z-index: 4;
+  height: 42vh;
+  transform: translateY(calc(var(--scroll) * -0.08));
+  background:
+    radial-gradient(ellipse at 28% 36%, rgba(255, 62, 165, 0.42), transparent 34%),
+    radial-gradient(ellipse at 72% 30%, rgba(65, 244, 233, 0.38), transparent 38%),
+    linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.88));
+  filter: blur(4px);
+}
+
+@keyframes windowPulse {
+  0%,
+  100% {
+    filter: brightness(0.9);
+  }
+
+  50% {
+    filter: brightness(1.22);
+  }
+}
+
+@keyframes rainDrift {
+  from {
+    background-position: 0 0, 0 0;
+  }
+
+  to {
+    background-position: -32px 96px, -48px 128px;
+  }
+}
+
+.topbar,
+main {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.topbar {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 28px 0 18px;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(1.9rem, 4vw, 4.2rem);
+  line-height: 0.95;
+  max-width: 620px;
+}
+
+h2 {
+  font-size: 1.12rem;
+}
+
+.eyebrow {
+  color: var(--cyan);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(7, 8, 19, 0.72);
+}
+
+.tab {
+  min-width: 108px;
+}
+
+.tab.active,
+.primary {
+  border-color: rgba(255, 62, 165, 0.75);
+  background: linear-gradient(135deg, rgba(255, 62, 165, 0.95), rgba(65, 244, 233, 0.7));
+  color: #060713;
+  font-weight: 900;
+}
+
+.view {
+  display: none;
+}
+
+.view.active {
+  display: block;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 16px;
+}
+
+.timer-panel,
+.character-zone,
+.log-panel,
+.activity-panel,
+.calendar-panel,
+.chart-panel,
+.muscle-panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.timer-panel {
+  padding: 20px;
+}
+
+.timer-header,
+.panel-heading,
+.character-title {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.timer-header span,
+.timer-header strong,
+.pill {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.timer {
+  display: block;
+  margin: 16px 0;
+  color: var(--cyan);
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: clamp(3rem, 9vw, 6.6rem);
+  line-height: 1;
+  text-shadow: 0 0 24px rgba(65, 244, 233, 0.35);
+}
+
+.timer-actions,
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.stats-strip article {
+  min-height: 104px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-strong);
+}
+
+.stats-strip span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.stats-strip strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.65rem;
+}
+
+.workout-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.95fr) minmax(320px, 1.05fr);
+  gap: 16px;
+  margin: 16px 0 30px;
+}
+
+.character-zone {
+  min-height: 660px;
+  padding: 18px;
+}
+
+.character-title p {
+  color: var(--gold);
+}
+
+.avatar {
+  width: 100%;
+  height: 520px;
+  margin-top: 12px;
+  overflow: visible;
+}
+
+.body-part.neutral,
+.torso {
+  fill: rgba(143, 151, 186, 0.2);
+  stroke: rgba(255, 255, 255, 0.16);
+  stroke-width: 2;
+}
+
+.muscle-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  transform: none;
+}
+
+.muscle-btn path,
+.muscle-btn line {
+  fill: rgba(255, 62, 165, 0.32);
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 3;
+  stroke-linecap: round;
+  cursor: pointer;
+  filter: drop-shadow(0 0 10px rgba(255, 62, 165, 0.18));
+  transition: fill 150ms ease, stroke 150ms ease, filter 150ms ease;
+}
+
+.muscle-btn line {
+  fill: none;
+}
+
+.muscle-btn:hover path,
+.muscle-btn:hover line,
+.muscle-btn.active path,
+.muscle-btn.active line {
+  fill: rgba(65, 244, 233, 0.78);
+  stroke: #faffff;
+  filter: url("#glow");
+}
+
+.muscle-chips {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.muscle-chips button.active {
+  border-color: rgba(255, 209, 102, 0.8);
+  background: rgba(255, 209, 102, 0.15);
+  color: var(--gold);
+  font-weight: 800;
+}
+
+.log-panel,
+.activity-panel,
+.calendar-panel,
+.chart-panel,
+.muscle-panel {
+  padding: 18px;
+}
+
+.log-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.wide {
+  width: 100%;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(65, 244, 233, 0.08);
+  white-space: nowrap;
+}
+
+.activity-panel {
+  grid-column: 2;
+}
+
+.log-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.log-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.log-item strong {
+  display: block;
+}
+
+.log-item span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.delete-log {
+  width: 44px;
+  min-width: 44px;
+  color: var(--red);
+}
+
+.empty {
+  display: grid;
+  gap: 6px;
+  padding: 26px 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.empty strong {
+  color: var(--text);
+}
+
+.trend-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.muscle-panel {
+  grid-column: 1 / -1;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(34px, 1fr));
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.day {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.82rem;
+}
+
+.day.worked {
+  border-color: rgba(99, 255, 143, 0.65);
+  background: rgba(99, 255, 143, 0.16);
+  color: var(--green);
+  font-weight: 900;
+}
+
+.bars {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items: end;
+  gap: 10px;
+  height: 250px;
+  margin-top: 18px;
+}
+
+.bar-wrap {
+  display: grid;
+  align-items: end;
+  height: 100%;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.bar {
+  min-height: 8px;
+  border-radius: 8px 8px 2px 2px;
+  background: linear-gradient(180deg, var(--pink), var(--cyan));
+  box-shadow: 0 0 20px rgba(255, 62, 165, 0.18);
+}
+
+.muscle-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.muscle-card {
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.meter {
+  height: 9px;
+  margin-top: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.meter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--cyan), var(--gold), var(--pink));
+}
+
+@media (max-width: 860px) {
+  .topbar,
+  .hero,
+  .workout-grid,
+  .trend-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .activity-panel,
+  .muscle-panel {
+    grid-column: auto;
+  }
+
+  .timer-actions,
+  .form-row,
+  .stats-strip,
+  .muscle-list,
+  .muscle-chips {
+    grid-template-columns: 1fr;
+  }
+
+  .character-zone {
+    min-height: auto;
+  }
+
+  .avatar {
+    height: auto;
+  }
+}
