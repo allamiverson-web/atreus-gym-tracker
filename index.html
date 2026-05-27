@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atreus Gym Tracker</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="city-bg" aria-hidden="true">
+      <div class="sky-haze"></div>
+      <div class="skyline skyline-back">
+        <span style="--h: 70vh; --w: 10vw; --x: -2vw; --delay: 0s"></span>
+        <span style="--h: 82vh; --w: 12vw; --x: 9vw; --delay: -0.8s"></span>
+        <span style="--h: 74vh; --w: 9vw; --x: 23vw; --delay: -1.6s"></span>
+        <span style="--h: 86vh; --w: 13vw; --x: 34vw; --delay: -0.3s"></span>
+        <span style="--h: 78vh; --w: 10vw; --x: 50vw; --delay: -1.1s"></span>
+        <span style="--h: 90vh; --w: 12vw; --x: 62vw; --delay: -2s"></span>
+        <span style="--h: 76vh; --w: 11vw; --x: 77vw; --delay: -0.5s"></span>
+        <span style="--h: 84vh; --w: 13vw; --x: 89vw; --delay: -1.4s"></span>
+      </div>
+      <div class="skyline skyline-front">
+        <span style="--h: 58vh; --w: 14vw; --x: -4vw; --delay: -0.4s"></span>
+        <span style="--h: 72vh; --w: 9vw; --x: 9vw; --delay: -1.8s"></span>
+        <span style="--h: 64vh; --w: 16vw; --x: 20vw; --delay: -0.9s"></span>
+        <span style="--h: 81vh; --w: 10vw; --x: 38vw; --delay: -2.2s"></span>
+        <span style="--h: 60vh; --w: 15vw; --x: 50vw; --delay: -1.2s"></span>
+        <span style="--h: 78vh; --w: 11vw; --x: 68vw; --delay: -0.1s"></span>
+        <span style="--h: 66vh; --w: 17vw; --x: 81vw; --delay: -1.5s"></span>
+      </div>
+      <div class="rain-layer"></div>
+      <div class="street-glow"></div>
+    </div>
+
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Atreus</p>
+        <h1>Cyber gym tracker</h1>
+      </div>
+      <nav class="tabs" aria-label="Main pages">
+        <button class="tab active" data-view="dashboard" type="button">Dashboard</button>
+        <button class="tab" data-view="trends" type="button">Trends</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="view active" id="dashboard-view">
+        <section class="hero">
+          <div class="timer-panel">
+            <div class="timer-header">
+              <span id="session-status">Ready to train</span>
+              <strong id="today-status">No session today</strong>
+            </div>
+            <output class="timer" id="timer-display">00:00:00</output>
+            <div class="timer-actions">
+              <button class="primary" id="start-btn" type="button">Start gym</button>
+              <button id="pause-btn" type="button">Pause</button>
+              <button id="finish-btn" type="button">Finish session</button>
+            </div>
+          </div>
+
+          <div class="stats-strip" aria-label="Current stats">
+            <article>
+              <span>Level</span>
+              <strong id="level-stat">1</strong>
+            </article>
+            <article>
+              <span>XP</span>
+              <strong id="xp-stat">0</strong>
+            </article>
+            <article>
+              <span>Streak</span>
+              <strong id="streak-stat">0 days</strong>
+            </article>
+            <article>
+              <span>Total reps</span>
+              <strong id="reps-stat">0</strong>
+            </article>
+          </div>
+        </section>
+
+        <section class="workout-grid">
+          <div class="character-zone" aria-label="Interactive muscle character">
+            <div class="character-title">
+              <h2>Tap a muscle</h2>
+              <p id="selected-copy">Chest selected</p>
+            </div>
+            <svg class="avatar" viewBox="0 0 360 560" role="img" aria-labelledby="avatar-title">
+              <title id="avatar-title">Interactive body muscle selector</title>
+              <defs>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="3.5" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              <circle cx="180" cy="66" r="40" class="body-part neutral" />
+              <rect x="151" y="105" width="58" height="52" rx="26" class="body-part neutral" />
+              <path d="M124 148 C138 112 222 112 236 148 L252 264 C232 292 128 292 108 264 Z" class="torso" />
+              <g class="muscle-btn" data-muscle="chest" role="button" tabindex="0" aria-label="Chest">
+                <path d="M132 158 C150 137 174 141 180 164 L180 235 C152 234 128 219 119 197 Z" />
+                <path d="M228 158 C210 137 186 141 180 164 L180 235 C208 234 232 219 241 197 Z" />
+              </g>
+              <g class="muscle-btn" data-muscle="back" role="button" tabindex="0" aria-label="Back">
+                <path d="M132 250 C146 269 214 269 228 250 L217 302 C201 322 159 322 143 302 Z" />
+              </g>
+              <g class="muscle-btn" data-muscle="shoulders" role="button" tabindex="0" aria-label="Shoulders">
+                <path d="M93 157 C100 131 123 124 145 139 C131 152 121 169 119 191 C105 190 94 178 93 157 Z" />
+                <path d="M267 157 C260 131 237 124 215 139 C229 152 239 169 241 191 C255 190 266 178 267 157 Z" />
+              </g>
+              <g class="muscle-btn" data-muscle="arms" role="button" tabindex="0" aria-label="Arms">
+                <path d="M92 175 C112 183 113 212 103 248 L83 328 C79 343 55 339 59 322 L72 246 C76 215 73 190 92 175 Z" />
+                <path d="M268 175 C248 183 247 212 257 248 L277 328 C281 343 305 339 301 322 L288 246 C284 215 287 190 268 175 Z" />
+              </g>
+              <g class="muscle-btn" data-muscle="core" role="button" tabindex="0" aria-label="Core">
+                <path d="M146 237 L214 237 L209 324 C193 337 167 337 151 324 Z" />
+                <line x1="180" y1="242" x2="180" y2="326" />
+                <line x1="153" y1="270" x2="207" y2="270" />
+                <line x1="154" y1="300" x2="206" y2="300" />
+              </g>
+              <g class="muscle-btn" data-muscle="legs" role="button" tabindex="0" aria-label="Legs">
+                <path d="M148 326 C169 338 177 384 169 433 L158 513 C154 533 124 531 127 510 L132 411 C133 374 134 346 148 326 Z" />
+                <path d="M212 326 C191 338 183 384 191 433 L202 513 C206 533 236 531 233 510 L228 411 C227 374 226 346 212 326 Z" />
+              </g>
+            </svg>
+            <div class="muscle-chips" aria-label="Muscle shortcuts">
+              <button data-muscle-chip="chest" type="button">Chest</button>
+              <button data-muscle-chip="back" type="button">Back</button>
+              <button data-muscle-chip="shoulders" type="button">Shoulders</button>
+              <button data-muscle-chip="arms" type="button">Arms</button>
+              <button data-muscle-chip="core" type="button">Core</button>
+              <button data-muscle-chip="legs" type="button">Legs</button>
+            </div>
+          </div>
+
+          <form class="log-panel" id="workout-form">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Log workout</p>
+                <h2 id="form-title">Chest workout</h2>
+              </div>
+              <span class="pill" id="muscle-xp">0 XP</span>
+            </div>
+
+            <label>
+              Exercise
+              <input id="exercise-input" type="text" placeholder="Bench press" required />
+            </label>
+            <div class="form-row">
+              <label>
+                Sets
+                <input id="sets-input" type="number" min="1" max="20" value="3" required />
+              </label>
+              <label>
+                Reps
+                <input id="reps-input" type="number" min="1" max="200" value="10" required />
+              </label>
+              <label>
+                Weight
+                <input id="weight-input" type="number" min="0" max="1000" value="0" />
+              </label>
+            </div>
+            <button class="primary wide" type="submit">Add workout</button>
+          </form>
+
+          <section class="activity-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Today</p>
+                <h2>Workout log</h2>
+              </div>
+              <button id="clear-demo-btn" type="button">Reset data</button>
+            </div>
+            <div class="log-list" id="log-list"></div>
+          </section>
+        </section>
+      </section>
+
+      <section class="view" id="trends-view">
+        <section class="trend-layout">
+          <div class="calendar-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Training days</p>
+                <h2>Monthly map</h2>
+              </div>
+              <span class="pill" id="month-label"></span>
+            </div>
+            <div class="calendar" id="calendar"></div>
+          </div>
+
+          <div class="chart-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Past 7 days</p>
+                <h2>Volume trend</h2>
+              </div>
+              <span class="pill" id="trend-summary">0 reps</span>
+            </div>
+            <div class="bars" id="bars"></div>
+          </div>
+
+          <div class="muscle-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Balance</p>
+                <h2>Muscle XP</h2>
+              </div>
+            </div>
+            <div class="muscle-list" id="muscle-list"></div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <template id="empty-template">
+      <div class="empty">
+        <strong>No workouts yet</strong>
+        <span>Start the timer, tap a muscle, and log your first set.</span>
+      </div>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
