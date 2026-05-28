@@ -222,6 +222,9 @@ function render() {
   $$(".muscle-btn").forEach((button) => {
     button.classList.toggle("active", button.dataset.muscle === state.selectedMuscle);
   });
+  $$("[data-muscle-fill]").forEach((part) => {
+    part.classList.toggle("active", part.dataset.muscleFill === state.selectedMuscle);
+  });
   $$("[data-muscle-chip]").forEach((button) => {
     button.classList.toggle("active", button.dataset.muscleChip === state.selectedMuscle);
   });
