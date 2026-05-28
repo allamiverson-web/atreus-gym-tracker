@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="asphalt" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#101825"/>
+      <stop offset="1" stop-color="#050914"/>
+    </linearGradient>
+    <linearGradient id="roofA" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#eef5ff"/>
+      <stop offset="0.48" stop-color="#74859c"/>
+      <stop offset="1" stop-color="#202b3d"/>
+    </linearGradient>
+    <linearGradient id="roofB" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f8d2d8"/>
+      <stop offset="0.52" stop-color="#997c91"/>
+      <stop offset="1" stop-color="#283044"/>
+    </linearGradient>
+    <linearGradient id="roofC" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#d7fff4"/>
+      <stop offset="0.5" stop-color="#4f9e94"/>
+      <stop offset="1" stop-color="#152e36"/>
+    </linearGradient>
+    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="24" dy="36" stdDeviation="16" flood-color="#02040a" flood-opacity="0.62"/>
+    </filter>
+    <pattern id="roofLines" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M0 4H26M4 0V26" fill="none" stroke="#ffffff" stroke-opacity="0.24" stroke-width="2"/>
+    </pattern>
+    <pattern id="windows" width="22" height="30" patternUnits="userSpaceOnUse">
+      <rect x="5" y="5" width="5" height="8" fill="#e7f8ff" opacity="0.5"/>
+      <rect x="14" y="16" width="4" height="7" fill="#75ffe6" opacity="0.3"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#asphalt)"/>
+  <path d="M650-60 790 1240M-40 690 1640 520M250-40 1180 1240M-60 1040 1660 230" stroke="#070a13" stroke-width="56" opacity="0.9"/>
+  <path d="M650-60 790 1240M-40 690 1640 520M250-40 1180 1240M-60 1040 1660 230" stroke="#31425a" stroke-width="6" opacity="0.55"/>
+  <g filter="url(#shadow)">
+    <g transform="translate(70 40) rotate(-14)"><rect width="120" height="310" fill="url(#roofA)"/><rect width="120" height="310" fill="url(#roofLines)"/></g>
+    <g transform="translate(250 70) rotate(11)"><rect width="150" height="240" fill="url(#roofB)"/><rect width="150" height="240" fill="url(#windows)"/></g>
+    <g transform="translate(460 10) rotate(-7)"><rect width="105" height="360" fill="url(#roofA)"/><rect width="105" height="360" fill="url(#roofLines)"/></g>
+    <g transform="translate(700 30) rotate(9)"><rect width="185" height="270" fill="url(#roofC)"/><rect width="185" height="270" fill="url(#windows)"/></g>
+    <g transform="translate(980 20) rotate(-18)"><rect width="130" height="380" fill="url(#roofA)"/><rect width="130" height="380" fill="url(#roofLines)"/></g>
+    <g transform="translate(1230 60) rotate(13)"><rect width="210" height="290" fill="url(#roofB)"/><rect width="210" height="290" fill="url(#windows)"/></g>
+    <g transform="translate(50 420) rotate(8)"><rect width="220" height="350" fill="url(#roofC)"/><rect width="220" height="350" fill="url(#windows)"/></g>
+    <g transform="translate(340 360) rotate(-16)"><rect width="150" height="420" fill="url(#roofA)"/><rect width="150" height="420" fill="url(#roofLines)"/></g>
+    <g transform="translate(570 430) rotate(14)"><rect width="210" height="260" fill="url(#roofB)"/><rect width="210" height="260" fill="url(#windows)"/></g>
+    <g transform="translate(860 350) rotate(-8)"><rect width="160" height="460" fill="url(#roofA)"/><rect width="160" height="460" fill="url(#roofLines)"/></g>
+    <g transform="translate(1100 410) rotate(17)"><rect width="240" height="330" fill="url(#roofC)"/><rect width="240" height="330" fill="url(#windows)"/></g>
+    <g transform="translate(1390 340) rotate(-10)"><rect width="150" height="500" fill="url(#roofA)"/><rect width="150" height="500" fill="url(#roofLines)"/></g>
+    <g transform="translate(110 870) rotate(-18)"><rect width="180" height="300" fill="url(#roofB)"/><rect width="180" height="300" fill="url(#windows)"/></g>
+    <g transform="translate(420 830) rotate(12)"><rect width="230" height="320" fill="url(#roofA)"/><rect width="230" height="320" fill="url(#roofLines)"/></g>
+    <g transform="translate(760 830) rotate(-13)"><rect width="190" height="360" fill="url(#roofC)"/><rect width="190" height="360" fill="url(#windows)"/></g>
+    <g transform="translate(1050 780) rotate(9)"><rect width="260" height="380" fill="url(#roofB)"/><rect width="260" height="380" fill="url(#windows)"/></g>
+    <g transform="translate(1380 830) rotate(-16)"><rect width="170" height="340" fill="url(#roofA)"/><rect width="170" height="340" fill="url(#roofLines)"/></g>
+  </g>
+  <g opacity="0.8">
+    <path d="M0 0H1600V210C1200 160 880 250 620 190C350 130 180 210 0 170Z" fill="#f8fbff" opacity="0.16"/>
+    <path d="M0 1200H1600V850C1270 1010 980 910 680 1000C350 1095 170 980 0 1070Z" fill="#00040b" opacity="0.42"/>
+    <circle cx="1160" cy="260" r="220" fill="#a7f8ff" opacity="0.13"/>
+    <circle cx="370" cy="920" r="260" fill="#ff73b4" opacity="0.1"/>
+  </g>
+</svg>
