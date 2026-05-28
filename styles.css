@@ -324,58 +324,69 @@ h2 {
   fill: rgba(0, 0, 0, 0.38);
 }
 
-.hair {
-  fill: #17101b;
-  stroke: rgba(255, 255, 255, 0.14);
-  stroke-width: 2;
+.anatomy-model {
+  isolation: isolate;
 }
 
-.skin,
-.neck {
+.anatomy-base {
   fill: url("#skin");
-  stroke: rgba(255, 255, 255, 0.18);
-  stroke-width: 2;
+  stroke: rgba(255, 239, 229, 0.32);
+  stroke-width: 1.4;
 }
 
-.face {
-  fill: #14111b;
+.torso-base {
+  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.34));
 }
 
-.face-line,
-.armor-line {
+.skin-side {
+  fill: url("#skinSide");
+  opacity: 0.72;
+}
+
+.face-mark,
+.body-shade {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.26);
+  stroke: rgba(70, 34, 40, 0.27);
   stroke-linecap: round;
-  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
 }
 
-.suit-base {
-  fill: url("#suit");
+.body-shade {
+  stroke: rgba(255, 237, 225, 0.22);
+}
+
+.briefs {
+  fill: rgba(13, 15, 28, 0.92);
   stroke: rgba(255, 255, 255, 0.18);
-  stroke-width: 3;
-}
-
-.limb {
-  fill: #171a30;
-}
-
-.boot {
-  fill: #090b16;
-  stroke: rgba(255, 255, 255, 0.15);
-  stroke-width: 2;
+  stroke-width: 1.5;
 }
 
 .muscle-fill {
-  fill: rgba(255, 62, 165, 0.2);
-  stroke: rgba(255, 255, 255, 0.18);
-  stroke-width: 2;
-  transition: fill 150ms ease, stroke 150ms ease, filter 150ms ease;
+  fill: url("#muscleTone");
+  opacity: 0.34;
+  stroke: rgba(255, 237, 225, 0.24);
+  stroke-width: 1.5;
+  transition: fill 150ms ease, opacity 150ms ease, stroke 150ms ease, filter 150ms ease;
 }
 
 .muscle-fill.active {
-  fill: rgba(65, 244, 233, 0.62);
+  fill: url("#muscleActive");
+  opacity: 0.9;
   stroke: rgba(255, 255, 255, 0.65);
   filter: url("#glow");
+}
+
+.lat-fill {
+  opacity: 0.28;
+}
+
+.anatomy-line {
+  fill: none;
+  stroke: rgba(255, 238, 226, 0.36);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
 }
 
 .muscle-btn {
@@ -400,13 +411,13 @@ h2 {
 }
 
 .muscle-btn:hover path {
-  fill: rgba(65, 244, 233, 0.12);
+  fill: transparent;
 }
 
 .muscle-btn.active path {
-  fill: rgba(65, 244, 233, 0.62);
-  stroke: rgba(255, 255, 255, 0.65);
-  filter: url("#glow");
+  fill: transparent;
+  stroke: transparent;
+  filter: none;
 }
 
 .muscle-chips {
