@@ -8,28 +8,9 @@
   </head>
   <body>
     <div class="city-bg" aria-hidden="true">
-      <div class="sky-haze"></div>
-      <div class="skyline skyline-back">
-        <span style="--h: 70vh; --w: 10vw; --x: -2vw; --delay: 0s"></span>
-        <span style="--h: 82vh; --w: 12vw; --x: 9vw; --delay: -0.8s"></span>
-        <span style="--h: 74vh; --w: 9vw; --x: 23vw; --delay: -1.6s"></span>
-        <span style="--h: 86vh; --w: 13vw; --x: 34vw; --delay: -0.3s"></span>
-        <span style="--h: 78vh; --w: 10vw; --x: 50vw; --delay: -1.1s"></span>
-        <span style="--h: 90vh; --w: 12vw; --x: 62vw; --delay: -2s"></span>
-        <span style="--h: 76vh; --w: 11vw; --x: 77vw; --delay: -0.5s"></span>
-        <span style="--h: 84vh; --w: 13vw; --x: 89vw; --delay: -1.4s"></span>
-      </div>
-      <div class="skyline skyline-front">
-        <span style="--h: 58vh; --w: 14vw; --x: -4vw; --delay: -0.4s"></span>
-        <span style="--h: 72vh; --w: 9vw; --x: 9vw; --delay: -1.8s"></span>
-        <span style="--h: 64vh; --w: 16vw; --x: 20vw; --delay: -0.9s"></span>
-        <span style="--h: 81vh; --w: 10vw; --x: 38vw; --delay: -2.2s"></span>
-        <span style="--h: 60vh; --w: 15vw; --x: 50vw; --delay: -1.2s"></span>
-        <span style="--h: 78vh; --w: 11vw; --x: 68vw; --delay: -0.1s"></span>
-        <span style="--h: 66vh; --w: 17vw; --x: 81vw; --delay: -1.5s"></span>
-      </div>
-      <div class="rain-layer"></div>
-      <div class="street-glow"></div>
+      <div class="aerial-city"></div>
+      <div class="city-scan"></div>
+      <div class="city-glow"></div>
     </div>
 
     <header class="topbar">
@@ -85,7 +66,7 @@
               <h2>Tap a muscle</h2>
               <p id="selected-copy">Chest selected</p>
             </div>
-            <svg class="avatar" viewBox="0 0 360 560" role="img" aria-labelledby="avatar-title">
+            <svg class="avatar character-avatar" viewBox="0 0 360 560" role="img" aria-labelledby="avatar-title">
               <title id="avatar-title">Interactive body muscle selector</title>
               <defs>
                 <filter id="glow">
@@ -95,34 +76,62 @@
                     <feMergeNode in="SourceGraphic" />
                   </feMerge>
                 </filter>
+                <linearGradient id="suit" x1="92" x2="268" y1="94" y2="514" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#232944" />
+                  <stop offset="0.54" stop-color="#17192f" />
+                  <stop offset="1" stop-color="#0b0e1e" />
+                </linearGradient>
+                <linearGradient id="skin" x1="130" x2="225" y1="24" y2="140" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#ffd0b6" />
+                  <stop offset="1" stop-color="#b86f64" />
+                </linearGradient>
               </defs>
-              <circle cx="180" cy="66" r="40" class="body-part neutral" />
-              <rect x="151" y="105" width="58" height="52" rx="26" class="body-part neutral" />
-              <path d="M124 148 C138 112 222 112 236 148 L252 264 C232 292 128 292 108 264 Z" class="torso" />
+              <ellipse cx="180" cy="528" rx="92" ry="16" class="character-shadow" />
+              <path d="M132 39 C141 18 176 9 205 19 C229 28 245 51 237 82 C232 101 217 118 195 125 L164 125 C139 116 122 91 126 66 C127 56 129 47 132 39 Z" class="hair" />
+              <path d="M138 70 C138 38 162 23 184 23 C209 23 228 43 226 73 C224 105 205 125 181 125 C157 125 138 102 138 70 Z" class="skin" />
+              <path d="M150 47 C165 24 202 24 220 57 C206 45 181 42 154 56 Z" class="hair" />
+              <circle cx="166" cy="75" r="4" class="face" />
+              <circle cx="196" cy="75" r="4" class="face" />
+              <path d="M170 98 C179 105 190 105 199 98" class="face-line" />
+              <path d="M160 119 L200 119 L210 155 C193 169 166 169 150 155 Z" class="neck" />
+              <path d="M114 154 C131 119 157 106 180 106 C204 106 229 119 247 154 C272 203 267 270 237 324 L216 512 L186 512 L180 365 L174 512 L144 512 L123 324 C93 269 89 203 114 154 Z" class="suit-base" />
+              <path d="M115 160 C92 174 76 211 68 268 L56 360 C53 383 83 388 91 365 L111 283 C121 244 132 211 145 178 Z" class="suit-base limb" />
+              <path d="M245 160 C268 174 284 211 292 268 L304 360 C307 383 277 388 269 365 L249 283 C239 244 228 211 215 178 Z" class="suit-base limb" />
+              <path d="M143 511 L136 536 L171 536 L177 511 Z" class="boot" />
+              <path d="M183 511 L189 536 L224 536 L217 511 Z" class="boot" />
+              <path d="M122 156 C140 137 160 132 180 132 C201 132 220 137 238 156" class="armor-line" />
+              <path d="M139 322 C160 341 201 341 222 322" class="armor-line" />
+              <path d="M180 165 L180 332" class="armor-line" />
+              <path d="M128 242 C151 257 209 257 232 242" class="armor-line" />
+              <path data-muscle-fill="chest" d="M145 178 C158 164 172 159 180 180 C188 159 202 164 215 178 C211 215 197 236 180 239 C163 236 149 215 145 178 Z" class="muscle-fill chest-fill" />
+              <path data-muscle-fill="back" d="M141 250 C156 268 204 268 219 250 L212 318 C194 334 166 334 148 318 Z" class="muscle-fill back-fill" />
+              <path data-muscle-fill="shoulders" d="M107 157 C113 135 134 128 153 141 C143 153 136 171 132 193 C119 191 108 179 107 157 Z" class="muscle-fill shoulders-fill" />
+              <path data-muscle-fill="shoulders" d="M253 157 C247 135 226 128 207 141 C217 153 224 171 228 193 C241 191 252 179 253 157 Z" class="muscle-fill shoulders-fill" />
+              <path data-muscle-fill="arms" d="M95 180 C116 191 114 226 103 268 L88 350 C84 368 61 364 65 345 L79 269 C84 226 77 197 95 180 Z" class="muscle-fill arms-fill" />
+              <path data-muscle-fill="arms" d="M265 180 C244 191 246 226 257 268 L272 350 C276 368 299 364 295 345 L281 269 C276 226 283 197 265 180 Z" class="muscle-fill arms-fill" />
+              <path data-muscle-fill="core" d="M151 239 L209 239 L204 321 C190 333 170 333 156 321 Z" class="muscle-fill core-fill" />
+              <path data-muscle-fill="legs" d="M147 330 C166 340 176 383 171 431 L162 514 C159 535 133 533 135 512 L137 421 C138 379 136 348 147 330 Z" class="muscle-fill legs-fill" />
+              <path data-muscle-fill="legs" d="M213 330 C194 340 184 383 189 431 L198 514 C201 535 227 533 225 512 L223 421 C222 379 224 348 213 330 Z" class="muscle-fill legs-fill" />
               <g class="muscle-btn" data-muscle="chest" role="button" tabindex="0" aria-label="Chest">
-                <path d="M132 158 C150 137 174 141 180 164 L180 235 C152 234 128 219 119 197 Z" />
-                <path d="M228 158 C210 137 186 141 180 164 L180 235 C208 234 232 219 241 197 Z" />
+                <path d="M145 178 C158 164 172 159 180 180 C188 159 202 164 215 178 C211 215 197 236 180 239 C163 236 149 215 145 178 Z" />
               </g>
               <g class="muscle-btn" data-muscle="back" role="button" tabindex="0" aria-label="Back">
-                <path d="M132 250 C146 269 214 269 228 250 L217 302 C201 322 159 322 143 302 Z" />
+                <path d="M141 250 C156 268 204 268 219 250 L212 318 C194 334 166 334 148 318 Z" />
               </g>
               <g class="muscle-btn" data-muscle="shoulders" role="button" tabindex="0" aria-label="Shoulders">
-                <path d="M93 157 C100 131 123 124 145 139 C131 152 121 169 119 191 C105 190 94 178 93 157 Z" />
-                <path d="M267 157 C260 131 237 124 215 139 C229 152 239 169 241 191 C255 190 266 178 267 157 Z" />
+                <path d="M107 157 C113 135 134 128 153 141 C143 153 136 171 132 193 C119 191 108 179 107 157 Z" />
+                <path d="M253 157 C247 135 226 128 207 141 C217 153 224 171 228 193 C241 191 252 179 253 157 Z" />
               </g>
               <g class="muscle-btn" data-muscle="arms" role="button" tabindex="0" aria-label="Arms">
-                <path d="M92 175 C112 183 113 212 103 248 L83 328 C79 343 55 339 59 322 L72 246 C76 215 73 190 92 175 Z" />
-                <path d="M268 175 C248 183 247 212 257 248 L277 328 C281 343 305 339 301 322 L288 246 C284 215 287 190 268 175 Z" />
+                <path d="M95 180 C116 191 114 226 103 268 L88 350 C84 368 61 364 65 345 L79 269 C84 226 77 197 95 180 Z" />
+                <path d="M265 180 C244 191 246 226 257 268 L272 350 C276 368 299 364 295 345 L281 269 C276 226 283 197 265 180 Z" />
               </g>
               <g class="muscle-btn" data-muscle="core" role="button" tabindex="0" aria-label="Core">
-                <path d="M146 237 L214 237 L209 324 C193 337 167 337 151 324 Z" />
-                <line x1="180" y1="242" x2="180" y2="326" />
-                <line x1="153" y1="270" x2="207" y2="270" />
-                <line x1="154" y1="300" x2="206" y2="300" />
+                <path d="M151 239 L209 239 L204 321 C190 333 170 333 156 321 Z" />
               </g>
               <g class="muscle-btn" data-muscle="legs" role="button" tabindex="0" aria-label="Legs">
-                <path d="M148 326 C169 338 177 384 169 433 L158 513 C154 533 124 531 127 510 L132 411 C133 374 134 346 148 326 Z" />
-                <path d="M212 326 C191 338 183 384 191 433 L202 513 C206 533 236 531 233 510 L228 411 C227 374 226 346 212 326 Z" />
+                <path d="M147 330 C166 340 176 383 171 431 L162 514 C159 535 133 533 135 512 L137 421 C138 379 136 348 147 330 Z" />
+                <path d="M213 330 C194 340 184 383 189 431 L198 514 C201 535 227 533 225 512 L223 421 C222 379 224 348 213 330 Z" />
               </g>
             </svg>
             <div class="muscle-chips" aria-label="Muscle shortcuts">
